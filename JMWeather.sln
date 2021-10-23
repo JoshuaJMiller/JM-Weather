@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFUI", "WPFUI\WPFUI.csproj", "{87807FFD-F659-4815-A478-10FF80D4F2A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JMAPILibrary", "JMAPILibrary\JMAPILibrary.csproj", "{7B5C864A-1DE1-4B57-973C-CADDF2772BD4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87807FFD-F659-4815-A478-10FF80D4F2A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87807FFD-F659-4815-A478-10FF80D4F2A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87807FFD-F659-4815-A478-10FF80D4F2A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87807FFD-F659-4815-A478-10FF80D4F2A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B5C864A-1DE1-4B57-973C-CADDF2772BD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B5C864A-1DE1-4B57-973C-CADDF2772BD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B5C864A-1DE1-4B57-973C-CADDF2772BD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B5C864A-1DE1-4B57-973C-CADDF2772BD4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CB9031EE-7708-4B55-A3FF-617FC49EDCEA}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,59 @@
+﻿<Window x:Class="WPFUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFUI"
+        mc:Ignorable="d"
+        FontSize="30" FontFamily="Segoe UI Light" Loaded="Window_Loaded"
+        Title="JM Weather" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5"
+                   Text="JM Weather" />
+        <TextBox Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="3"
+                 Text="ZIP Code" />
+
+        <TextBlock Grid.Row="2" Grid.Column="4" x:Name="nameRegion" />
+
+        <Image Grid.Row="3" Grid.Column="1" x:Name="conditionIcon" />
+        <TextBlock Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="3" x:Name="tempF" />
+        <TextBlock Grid.Row="4" Grid.Column="4" x:Name="conditionText" />
+        <TextBlock Grid.Row="5" Grid.Column="1"
+                   Text="Sun" />
+        <TextBlock Grid.Row="5" Grid.Column="2"
+                   Text="Mon" />
+        <TextBlock Grid.Row="5" Grid.Column="3"
+                   Text="Tue" />
+        <TextBlock Grid.Row="5" Grid.Column="4"
+                   Text="Wed" />
+        <TextBlock Grid.Row="5" Grid.Column="5"
+                   Text="Thu" />
+        <TextBlock Grid.Row="5" Grid.Column="6"
+                   Text="Fri" />
+        <TextBlock Grid.Row="5" Grid.Column="7"
+                   Text="Sat" />
+    </Grid>
+</Window>
