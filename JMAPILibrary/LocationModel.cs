@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace JMAPILibrary
 {
-    public class WeatherModel
+    public class LocationModel
     {
-        public CurrentModel Current { get; set; }
-        public LocationModel Location { get; set; }
+        public string Name { get; set; }
+        public string Region { get; set; }
     }
 }

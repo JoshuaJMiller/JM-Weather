@@ -37,13 +37,39 @@ namespace WPFUI
 
             conditionIcon.Source = new BitmapImage(uriSource);
             conditionText.Text = weatherModel.Current.Condition.Text;
-
-            tempF.Text = weatherModel.Current.temp_f.ToString();
+            nameRegion.Text = $"{weatherModel.Location.Name}, {weatherModel.Location.Region}";
+            feelsLikeF.Text = $"Feels like {weatherModel.Current.feelslike_f}\x00B0";
+            humidity.Text = $"Humidity {weatherModel.Current.humidity}%";
+            windMPH.Text = $"Wind {weatherModel.Current.wind_mph} mph";
+            tempF.Text = $"{weatherModel.Current.temp_f.ToString()}\x00B0";
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             await LoadCurrentWeather();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void Button_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (this.WindowState == WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Normal;
+            }
+            else if (this.WindowState == WindowState.Normal)
+            {
+                this.WindowState = WindowState.Maximized;
+            }
+        }
+
     }
 }

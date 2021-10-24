@@ -5,55 +5,192 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFUI"
         mc:Ignorable="d"
-        FontSize="30" FontFamily="Segoe UI Light" Loaded="Window_Loaded"
-        Title="JM Weather" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        FontSize="30" FontFamily="Segoe UI Light" Loaded="Window_Loaded" Foreground="White"
+        Title="MainWindow"
+        WindowState="Normal"
+        WindowStyle="None"
+        ResizeMode="CanResizeWithGrip" AllowsTransparency="True"
+        MinHeight="500"
+        MinWidth="500"
+        >
+
+    <Window.Resources>
+        <ControlTemplate x:Key="noButton" TargetType="Button">
+            <Grid Background="{TemplateBinding Background}">
+                <ContentPresenter />
+            </Grid>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="myTextBox" TargetType="TextBox">
+            <Grid>
+                <TextBox Text="{Binding Text, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Text="Enter Zip Code"
+                Margin="5,0,5,0"
+                Foreground="#FF808080"
+                
+                IsHitTestVisible="False"
+                x:Name="UserMessage"
+                Visibility="Hidden"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="Text" Value=""/>
+                        <Condition Property="IsKeyboardFocusWithin" Value="False"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Visibility" TargetName="UserMessage" Value="Visible"/>
+                </MultiTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+    
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="20" />
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            
-            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="40" />
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5"
-                   Text="JM Weather" />
-        <TextBox Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="3"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+
+        <Border Background="#FF464646"/>
+        <Border Grid.Column="7" Grid.RowSpan="2147483647" Background="DimGray"/>
+
+        <Border Grid.Row="1" Background="#2f5cb6" />
+        <Border Grid.Row="2" Background="#1f3d7a" />
+        <Border Grid.Row="3" Background="#1f3d7a" />
+        <Border Grid.Row="4" Background="#1f3d7a" />
+        <Border Grid.Row="5" Background="#152951" />
+
+        <Button BorderThickness="0" Foreground="White" FontFamily="Candara" Grid.Column="7" Grid.Row="0" Content="x" FontWeight="ExtraLight" FontSize="20" Background="#FF464646"
+                Click="Button_Click" />
+
+        <DockPanel>
+            <TextBox  Margin="5" Template="{StaticResource myTextBox}" DockPanel.Dock="Right" MinWidth="100" />
+            <Button MouseLeftButtonDown="Window_MouseLeftButtonDown" Template="{StaticResource noButton}" Background="#FF464646" DockPanel.Dock="Left" MouseDoubleClick="Button_MouseDoubleClick" ClickMode="Hover" Content="JM Weather" Foreground="White"/>
+        </DockPanel>
+
+
+        <!-- name_region -->
+        <TextBlock x:Name="nameRegion" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+        <!-- icon, temp, f, condition -->
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Grid.Row="2">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <Image Margin="10" MaxHeight="100" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       x:Name="conditionIcon" />
+                <TextBlock FontSize="60" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       x:Name="tempF" />
+                <TextBlock Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Text="f" />
+            </StackPanel>
+            <TextBlock Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   x:Name="conditionText" />
+        </StackPanel>
+        
+        <!-- other info -->
+        <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="3">
+            <TextBlock Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       x:Name="feelsLikeF"/>
+            <TextBlock Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       x:Name="humidity"/>
+            <TextBlock Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       x:Name="windMPH"/>
+        </WrapPanel>
+
+        <!-- 7 day -->
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="4">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="Day 1" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="icon" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="temp" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="condition_text" />
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="Day 2" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="icon" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="temp" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="condition_text" />
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="Day 3" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="icon" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="temp" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="condition_text" />
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="Day 4" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="icon" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="temp" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="condition_text" />
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="Day 5" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="icon" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="temp" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="condition_text" />
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="Day 6" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="icon" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="temp" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="condition_text" />
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="Day 7" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="icon" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="temp" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Text="condition_text" />
+            </StackPanel>
+        </StackPanel>
+
+        <!--<TextBox Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="3"
                  Text="ZIP Code" />
 
         <TextBlock Grid.Row="2" Grid.Column="4" x:Name="nameRegion" />
 
         <Image Grid.Row="3" Grid.Column="1" x:Name="conditionIcon" />
         <TextBlock Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="3" x:Name="tempF" />
-        <TextBlock Grid.Row="4" Grid.Column="4" x:Name="conditionText" />
-        <TextBlock Grid.Row="5" Grid.Column="1"
-                   Text="Sun" />
-        <TextBlock Grid.Row="5" Grid.Column="2"
-                   Text="Mon" />
-        <TextBlock Grid.Row="5" Grid.Column="3"
-                   Text="Tue" />
-        <TextBlock Grid.Row="5" Grid.Column="4"
-                   Text="Wed" />
-        <TextBlock Grid.Row="5" Grid.Column="5"
-                   Text="Thu" />
-        <TextBlock Grid.Row="5" Grid.Column="6"
-                   Text="Fri" />
-        <TextBlock Grid.Row="5" Grid.Column="7"
-                   Text="Sat" />
+        <TextBlock Grid.Row="4" Grid.Column="4" x:Name="conditionText" />-->
     </Grid>
 </Window>
