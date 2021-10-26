@@ -107,7 +107,7 @@
                 Click="Button_Click" />
 
         <DockPanel>
-            <TextBox  Margin="5" Template="{StaticResource myTextBox}" DockPanel.Dock="Right" MinWidth="100" />
+            <TextBox x:Name="zipCodeTextBox" Margin="5" Template="{StaticResource myTextBox}" DockPanel.Dock="Right" MinWidth="100" KeyDown="zipCodeTextBox_KeyDown" FontSize="20" VerticalAlignment="Center" />
             <Button MouseLeftButtonDown="Window_MouseLeftButtonDown" Template="{StaticResource noButton}" Background="#FF464646" DockPanel.Dock="Left" MouseDoubleClick="Button_MouseDoubleClick" ClickMode="Hover" Content=" JM Weather" Foreground="White"/>
         </DockPanel>
 
