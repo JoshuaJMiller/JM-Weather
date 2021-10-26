@@ -7,10 +7,11 @@ Delete all other weather apps from all devices! JM Weather is here!
 WPF Application (.NET Framework) that desrializes JSON from WeatherAPI.com into strongly typed C# objects which are displayed in UI
 
 
-![Alt text](/Screenshots/UI_and_7-day_upgrades.png?raw=true "Optional Title")
+![JM Weather Running](https://media.giphy.com/media/tokpUd3i4P9Ygf0yW8/giphy.gif)
 
 ## Next Features
 - Hourly weather
 - Enter ZIP Code funtionality
 - UI improvements
 - Historical weather data
+
