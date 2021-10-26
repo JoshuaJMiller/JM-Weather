@@ -10,12 +10,11 @@ namespace JMAPILibrary
 {
     public class WeatherProcessor
     {
-        
 
-        public static async Task<WeatherModel> LoadWeatherModels()
+
+        public static async Task<WeatherModel> LoadWeatherModels(string callType, string key, string location, string aqi)
         {
-            string url = "http://api.weatherapi.com/v1/current.json?key=efd1bc2dfe4c4a42a9c183606213108&q=91355&aqi=no";
-
+            string url = $"http://api.weatherapi.com/v1/{callType}.json?key={key}&q={location}/&aqi={aqi}";
 
             using (HttpResponseMessage response = await APIHelper.APIClient.GetAsync(url))
             {
@@ -29,46 +28,24 @@ namespace JMAPILibrary
                     throw new Exception(response.ReasonPhrase);
                 }
             }
+        }
 
-            //public static async Task<ConditionModel> LoadCurrentWeatherCondition()
-            //{
-            //    string url = "http://api.weatherapi.com/v1/current.json?key=efd1bc2dfe4c4a42a9c183606213108&q=91355&aqi=no";
+        public static async Task<WeatherModel> LoadWeatherModels(string callType, string key, string location, int days, string aqi, string alerts)
+        {
+            string url = $"http://api.weatherapi.com/v1/{callType}.json?key={key}&q={location}&days={days}&aqi={aqi}&alerts={alerts}";
 
-
-            //    using (HttpResponseMessage response = await APIHelper.APIClient.GetAsync(url))
-            //    {
-            //        if (response.IsSuccessStatusCode)
-            //        {
-            //            WeatherModel currentWeatherModel = await response.Content.ReadAsAsync<WeatherModel>();
-
-            //            return currentWeatherModel.Current.Condition;
-            //        }
-            //        else
-            //        {
-            //            throw new Exception(response.ReasonPhrase);
-            //        }
-            //    }
-            //}
-
-            //public static async Task<CurrentModel> LoadCurrentWeather()
-            //{
-            //    string url = "http://api.weatherapi.com/v1/current.json?key=efd1bc2dfe4c4a42a9c183606213108&q=91355&aqi=no";
-
-
-            //    using (HttpResponseMessage response = await APIHelper.APIClient.GetAsync(url))
-            //    {
-            //        if (response.IsSuccessStatusCode)
-            //        {
-            //            WeatherModel currentWeatherCurrentModel = await response.Content.ReadAsAsync<WeatherModel>();
-
-            //            return currentWeatherCurrentModel.Current;
-            //        }
-            //        else
-            //        {
-            //            throw new Exception(response.ReasonPhrase);
-            //        }
-            //    }
-            //}
+            using (HttpResponseMessage response = await APIHelper.APIClient.GetAsync(url))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    WeatherModel currentWeatherModel = await response.Content.ReadAsAsync<WeatherModel>();
+                    return currentWeatherModel;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
         }
     }
 }

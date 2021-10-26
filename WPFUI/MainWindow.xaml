@@ -15,6 +15,41 @@
         >
 
     <Window.Resources>
+
+        <Style x:Key="highLowStackPanel" TargetType="StackPanel">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="Margin" Value="40,0,40,0" />
+        </Style>
+
+        <Style x:Key="forecastMainTextBlock" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="FontSize" Value="24" /> 
+        </Style>
+
+        <Style x:Key="forecastLowTempTextBlock" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Foreground" Value="DimGray" />
+        </Style>
+
+        <Style x:Key="forecastConditionTextBlock" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Foreground" Value="DimGray" />
+        </Style>
+
+        <Style x:Key="forecastIcon" TargetType="Image">
+            <Setter Property="Margin" Value="0" />
+        </Style>
+
         <ControlTemplate x:Key="noButton" TargetType="Button">
             <Grid Background="{TemplateBinding Background}">
                 <ContentPresenter />
@@ -23,7 +58,7 @@
 
         <ControlTemplate x:Key="myTextBox" TargetType="TextBox">
             <Grid>
-                <TextBox Text="{Binding Text, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox x:Name="zipCode" Text="{Binding Text, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBlock HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Text="Enter Zip Code"
@@ -73,7 +108,7 @@
 
         <DockPanel>
             <TextBox  Margin="5" Template="{StaticResource myTextBox}" DockPanel.Dock="Right" MinWidth="100" />
-            <Button MouseLeftButtonDown="Window_MouseLeftButtonDown" Template="{StaticResource noButton}" Background="#FF464646" DockPanel.Dock="Left" MouseDoubleClick="Button_MouseDoubleClick" ClickMode="Hover" Content="JM Weather" Foreground="White"/>
+            <Button MouseLeftButtonDown="Window_MouseLeftButtonDown" Template="{StaticResource noButton}" Background="#FF464646" DockPanel.Dock="Left" MouseDoubleClick="Button_MouseDoubleClick" ClickMode="Hover" Content=" JM Weather" Foreground="White"/>
         </DockPanel>
 
 
@@ -105,83 +140,26 @@
         </WrapPanel>
 
         <!-- 7 day -->
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="4">
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+        <StackPanel x:Name="homeForecastStackPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="4">
+
+            <!--<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                <TextBlock x:Name="day1Day" HorizontalAlignment="Center" VerticalAlignment="Center"
                    Text="Day 1" />
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                <TextBlock x:Name="day1Icon" HorizontalAlignment="Center" VerticalAlignment="Center"
                    Text="icon" />
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="temp" />
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock x:Name="day1TempHigh" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Text="tmep_high" />
+                    <TextBlock Text=" / " />
+                    <TextBlock x:Name="day1TempLow" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Text="temp_low" />
+                </StackPanel>
+                <TextBlock x:Name="day1Text" HorizontalAlignment="Center" VerticalAlignment="Center"
                    Text="condition_text" />
-            </StackPanel>
-
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="Day 2" />
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="icon" />
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="temp" />
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="condition_text" />
-            </StackPanel>
-
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="Day 3" />
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="icon" />
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="temp" />
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="condition_text" />
-            </StackPanel>
-
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="Day 4" />
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="icon" />
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="temp" />
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="condition_text" />
-            </StackPanel>
-
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="Day 5" />
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="icon" />
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="temp" />
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="condition_text" />
-            </StackPanel>
-
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="Day 6" />
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="icon" />
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="temp" />
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="condition_text" />
-            </StackPanel>
-
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="Day 7" />
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="icon" />
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="temp" />
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="condition_text" />
-            </StackPanel>
+            </StackPanel>-->
+            
+            
+            
         </StackPanel>
 
         <!--<TextBox Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="3"

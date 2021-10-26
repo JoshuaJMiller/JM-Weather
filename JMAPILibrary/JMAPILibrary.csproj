@@ -50,6 +50,9 @@
     <Compile Include="APIHelper.cs" />
     <Compile Include="ConditionModel.cs" />
     <Compile Include="CurrentModel.cs" />
+    <Compile Include="DayModel.cs" />
+    <Compile Include="ForecastDayModel.cs" />
+    <Compile Include="ForecastModel.cs" />
     <Compile Include="LocationModel.cs" />
     <Compile Include="WeatherModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

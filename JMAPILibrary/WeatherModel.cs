@@ -10,5 +10,6 @@ namespace JMAPILibrary
     {
         public CurrentModel Current { get; set; }
         public LocationModel Location { get; set; }
+        public ForecastModel Forecast { get; set; }
     }
 }
